@@ -309,7 +309,7 @@ let
 
   fromManifest = sha256: manifest: { stdenv, lib, fetchurl, patchelf }:
     let manifestFile = if sha256 == null then builtins.fetchurl manifest else fetchurl { url = manifest; inherit sha256; };
-    in fromManifestFile manifestFile { inherit stdenv lib fetchurl patchelf; };
+    in fromManifestFile manifestFile { inherit stdenv lib fetchurl patchelf; } // { manifest = manifestFile; };
 
 in
 
